@@ -20,7 +20,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.swainstha.worldcup.R;
 import com.example.swainstha.worldcup.UI.UIFragments.CommonFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.PositionFragment;
 
