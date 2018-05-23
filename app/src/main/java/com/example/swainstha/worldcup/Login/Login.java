@@ -56,8 +56,8 @@ public class Login extends AppCompatActivity {
                         final String id = user_det.get("id").toString();
                         final String valid_user=user_det.get("result").toString();
                         Log.i("info", user_det.get("id").toString());
-                       Log.i("info", user_det.get("result").toString());
-                       //Toast.makeText(getApplicationContext(),user_det.get("result").toString()+user_det.get("id").toString(), Toast.LENGTH_LONG).show();
+                        Log.i("info", user_det.get("result").toString());
+                        //Toast.makeText(getApplicationContext(),user_det.get("result").toString()+user_det.get("id").toString(), Toast.LENGTH_LONG).show();
                         if(valid_user.equals("True"))
                         {
                             Intent i = new Intent(getApplicationContext(),MainActivity.class);
@@ -149,7 +149,6 @@ public class Login extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
-
 }
 
 
