@@ -21,6 +21,7 @@ public class MatchFragment extends Fragment {
 
     MatchListAdapter matchListAdapter;
     ListView matchListview;
+
     public MatchFragment() {
         // Required empty public constructor
     }
@@ -35,6 +36,7 @@ public class MatchFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
         matchListview= view.findViewById(R.id.match_list_view);
         matchListAdapter = new MatchListAdapter(this.getContext());

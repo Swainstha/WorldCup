@@ -1,9 +1,11 @@
 package com.example.swainstha.worldcup;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 
@@ -126,6 +128,19 @@ public class MainActivity extends  AppCompatActivity implements NavigationView.O
 
         } else if (id==R.id.Logout) {
 
+
+        } else if(id == R.id.Heroku) {
+            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.link), "https://world-cup-server.herokuapp.com");
+            editor.apply();
+
+
+        } else if(id == R.id.Local) {
+            SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString(getString(R.string.link), "http://192.168.1.119:3001");
+            editor.apply();
 
         }
 

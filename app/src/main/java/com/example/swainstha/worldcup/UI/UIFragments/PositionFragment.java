@@ -2,6 +2,7 @@ package com.example.swainstha.worldcup.UI.UIFragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -41,6 +42,7 @@ public class PositionFragment extends Fragment {
 
     ListView positionListView;
     PositionListAdapter positionListAdapter;
+
 //    private final String urlString = "http://192.168.1.119:3001";
     private final String urlString = "https://world-cup-server.herokuapp.com";
     private Socket socket;
@@ -134,8 +136,17 @@ public class PositionFragment extends Fragment {
         ViewGroup header = (ViewGroup)inflater.inflate(R.layout.position_list,positionListView,false);
         positionListView.addHeaderView(header);
 
+        //associating the listview with the adapter
         positionListView.setAdapter(positionListAdapter);
 
+    }
+
+    //function called that allows the fragment to clean up resources associated with its View.
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        socket.disconnect(); //disconnecting the socket
+        Log.i("INFO","Fragment Exit");
     }
 
     //check if the device is connected to the internet
@@ -170,12 +181,16 @@ public class PositionFragment extends Fragment {
             Random rand = new Random();
             int  id = rand.nextInt(50) + 1;
 
-            socket = IO.socket(urlString); //specifying the url
+            //using sharedPreferences to read the link to the server: heroku or local
+            SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+            String url = sharedPref.getString(getString(R.string.link), "http://192.168.1.119:3001");
+            Log.i("INFO",url);
+
+            socket = IO.socket(url); //specifying the url
             socket.connect(); //connecting to the server
             socket.emit("joinAndroid",Integer.toString(id));  //specifying the join group to the server
 
             //callback functions for socket connected, message received and socket disconnected
-
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 
                 @Override
@@ -192,6 +207,8 @@ public class PositionFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             try {
+
+                                //parse the json array
                                 for (int i = 0; i < array.length(); i++) {
                                     positionList.add(new PositionData(array.getJSONObject(i).getString("rank"),
                                             array.getJSONObject(i).getString("name"),

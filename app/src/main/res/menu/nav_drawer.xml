@@ -12,4 +12,16 @@
         android:title="Logout"
         app:showAsAction="never"
         />
+
+    <item
+        android:id="@+id/Heroku"
+        android:title="Heroku"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/Local"
+        android:title="Local"
+        app:showAsAction="never"
+        />
 </menu>

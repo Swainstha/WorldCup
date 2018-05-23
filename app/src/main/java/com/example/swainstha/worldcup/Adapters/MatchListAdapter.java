@@ -25,9 +25,6 @@ public class MatchListAdapter extends BaseAdapter {
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
 
-    Context context;
-    private ArrayList<MatchData> matchList;
-
     private ArrayList<MatchData> mData = new ArrayList<MatchData>();
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
 
@@ -38,17 +35,20 @@ public class MatchListAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    //adding other items
     public void addItem(final MatchData item) {
         mData.add(item);
         notifyDataSetChanged();
     }
 
+    //adding section header like group1, group2
     public void addSectionHeaderItem(final MatchData item) {
         mData.add(item);
         sectionHeader.add(mData.size() - 1);
         notifyDataSetChanged();
     }
 
+    //checking if it is a header or other item
     @Override
     public int getItemViewType(int position) {
         return sectionHeader.contains(position) ? TYPE_SEPARATOR : TYPE_ITEM;
@@ -77,6 +77,7 @@ public class MatchListAdapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         MatchListAdapter.ViewHolder holder = null;
         int rowType = getItemViewType(position);
 
@@ -115,6 +116,7 @@ public class MatchListAdapter extends BaseAdapter {
         return convertView;
     }
 
+    //viewholder cache
     public static class ViewHolder {
         public TextView team1;
         public TextView team2;
