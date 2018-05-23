@@ -22,6 +22,7 @@ import android.view.MenuItem;
 
 import com.example.swainstha.worldcup.UI.UIFragments.CommonFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.PositionFragment;
+import com.example.swainstha.worldcup.UI.UIFragments.MatchFragment;
 
 
 public class MainActivity extends  AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
@@ -76,7 +77,7 @@ public class MainActivity extends  AppCompatActivity implements NavigationView.O
                     return true;
                 case R.id.action_bottombar_recents:
                     toolbar.setTitle("Matches");
-                    fragment = new CommonFragment();
+                    fragment = new MatchFragment();
                     loadFragment(fragment);
                     return true;
                 case R.id.action_bottombar_trips:

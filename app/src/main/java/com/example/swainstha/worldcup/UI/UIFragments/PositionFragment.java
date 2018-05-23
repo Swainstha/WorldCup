@@ -41,7 +41,8 @@ public class PositionFragment extends Fragment {
 
     ListView positionListView;
     PositionListAdapter positionListAdapter;
-    private final String urlString = "http://192.168.1.119:3001";
+//    private final String urlString = "http://192.168.1.119:3001";
+    private final String urlString = "https://world-cup-server.herokuapp.com";
     private Socket socket;
     ArrayList<PositionData> positionList;
 
@@ -187,13 +188,10 @@ public class PositionFragment extends Fragment {
                 public void call(Object... args) {
 
                     Log.i("INFO", args[0].toString());
-                    final JSONObject obj = (JSONObject) args[0];
+                    final JSONArray array = (JSONArray) args[0];
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             try {
-
-                                List<String> list = new ArrayList<String>();
-                                JSONArray array = obj.getJSONArray("position");
                                 for (int i = 0; i < array.length(); i++) {
                                     positionList.add(new PositionData(array.getJSONObject(i).getString("rank"),
                                             array.getJSONObject(i).getString("name"),

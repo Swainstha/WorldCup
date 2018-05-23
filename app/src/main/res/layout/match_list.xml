@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_match"
+    style="?android:attr/listSeparatorTextViewStyle"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <TextView
+        android:id="@+id/item_match_team1"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+        android:text="Rank" />
+
+    <TextView
+        android:id="@+id/item_match_score1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="20dp"
+        android:layout_toRightOf="@+id/item_match_team1"
+        android:gravity="center_vertical"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/item_match_score2"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="20dp"
+        android:layout_toRightOf="@+id/item_match_score1"
+        android:gravity="center_vertical"
+        android:text="Name" />
+
+    <TextView
+        android:id="@+id/item_match_team2"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_toRightOf="@+id/item_match_score2"
+        android:text="Score" />
+
+</RelativeLayout>

@@ -43,7 +43,7 @@ private static class ViewHolder {
         // to add a custom view..
 
         PositionListAdapter.ViewHolder viewHolder;
-        PositionData calendarData= getItem(position);
+        PositionData positionData= getItem(position);
         final View result;
 
         if(convertView == null) {
@@ -63,9 +63,9 @@ private static class ViewHolder {
             result=convertView;
         }
 
-        viewHolder.position.setText(calendarData.getPosition());
-        viewHolder.name.setText(calendarData.getName());
-        viewHolder.score.setText(calendarData.getScore());
+        viewHolder.position.setText(positionData.getPosition());
+        viewHolder.name.setText(positionData.getName());
+        viewHolder.score.setText(positionData.getScore());
 
 
         // making view clickable
