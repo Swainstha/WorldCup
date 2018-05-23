@@ -139,7 +139,7 @@ public class MainActivity extends  AppCompatActivity implements NavigationView.O
         } else if(id == R.id.Local) {
             SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(getString(R.string.link), "http://192.168.1.119:3001");
+            editor.putString(getString(R.string.link), "http://192.168.1.117:3001");
             editor.apply();
 
         }
