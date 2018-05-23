@@ -81,7 +81,7 @@ public class MatchListAdapter extends BaseAdapter {
         int rowType = getItemViewType(position);
 
         if (convertView == null) {
-            mInflater = LayoutInflater.from(context);
+            //mInflater = LayoutInflater.from(context);
             holder = new MatchListAdapter.ViewHolder();
             switch (rowType) {
                 case TYPE_ITEM:

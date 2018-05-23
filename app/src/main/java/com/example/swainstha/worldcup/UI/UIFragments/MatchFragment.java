@@ -39,10 +39,11 @@ public class MatchFragment extends Fragment {
         matchListview= view.findViewById(R.id.match_list_view);
         matchListAdapter = new MatchListAdapter(this.getContext());
 
-        for (int i = 1; i < 10; i++) {
-            matchListAdapter.addItem(new MatchData("Chelsea","2","1","MU"));
-            if (i % 4 == 0) {
+        for (int i = 1; i < 21; i++) {
+            if ((i+4) % 5 == 0) {
                 matchListAdapter.addSectionHeaderItem(new MatchData("Group 1"));
+            } else {
+                matchListAdapter.addItem(new MatchData("Chelsea","2","1","MU"));
             }
         }
 
