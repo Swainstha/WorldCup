@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.swainstha.worldcup.UI.UIFragments.CommonFragment;
+import com.example.swainstha.worldcup.UI.UIFragments.GroupRankFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.PositionFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.MatchFragment;
 
@@ -72,22 +73,27 @@ public class MainActivity extends  AppCompatActivity implements NavigationView.O
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
-                case R.id.action_bottombar_calls:
+                case R.id.action_news:
                     toolbar.setTitle("News");
                     fragment = new CommonFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.action_bottombar_recents:
+                case R.id.action_matches:
                     toolbar.setTitle("Matches");
                     fragment = new MatchFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.action_bottombar_trips:
+                case R.id.action_position:
                     toolbar.setTitle("Position");
                     fragment = new PositionFragment();
                     loadFragment(fragment);
                     return true;
-                case R.id.action_bottombar_tours:
+                case R.id.action_group_ranks:
+                    toolbar.setTitle("Group Ranks");
+                    fragment = new GroupRankFragment();
+                    loadFragment(fragment);
+                    return true;
+                case R.id.action_history:
                     toolbar.setTitle("My History");
                     fragment = new CommonFragment();
                     loadFragment(fragment);
@@ -139,7 +145,7 @@ public class MainActivity extends  AppCompatActivity implements NavigationView.O
         } else if(id == R.id.Local) {
             SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(getString(R.string.link), "http://192.168.1.117:3001");
+            editor.putString(getString(R.string.link), "http://192.168.1.119:3001");
             editor.apply();
 
         }

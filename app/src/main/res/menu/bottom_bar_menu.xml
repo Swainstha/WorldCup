@@ -2,24 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_bottombar_calls"
+        android:id="@+id/action_news"
         android:icon="@drawable/news_24"
         android:title="News"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_bottombar_recents"
+        android:id="@+id/action_matches"
         android:icon="@drawable/soccer_ball_24"
         android:title="Matches"
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_bottombar_trips"
+        android:id="@+id/action_position"
         android:icon="@drawable/descending_sorting_24"
-        android:title="Rank"
+        android:title="Position"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/action_bottombar_tours"
+        android:id="@+id/action_group_ranks"
+        android:icon="@drawable/ic_query_builder_black_24dp"
+        android:title="Group Ranks"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_history"
         android:icon="@drawable/ic_query_builder_black_24dp"
         android:title="My History"
         app:showAsAction="ifRoom"/>

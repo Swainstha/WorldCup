@@ -91,6 +91,8 @@ public class MatchListAdapter extends BaseAdapter {
                     holder.team2 = (TextView) convertView.findViewById(R.id.item_match_team2);
                     holder.score1 = (TextView) convertView.findViewById(R.id.item_match_score1);
                     holder.score2 = (TextView) convertView.findViewById(R.id.item_match_score2);
+                    //holder.time = (TextView) convertView.findViewById(R.id.item_match_time);
+                    //holder.date = (TextView) convertView.findViewById(R.id.item_match_date);
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.match_list_header, null);
@@ -107,6 +109,8 @@ public class MatchListAdapter extends BaseAdapter {
                 holder.team2.setText(mData.get(position).getTeam2());
                 holder.score1.setText(mData.get(position).getScore1());
                 holder.score2.setText(mData.get(position).getScore2());
+                //holder.date.setText(mData.get(position).getDate());
+                //holder.time.setText(mData.get(position).getTime());
                 break;
 
             case TYPE_SEPARATOR:
@@ -123,6 +127,8 @@ public class MatchListAdapter extends BaseAdapter {
         public TextView score1;
         public TextView score2;
         public TextView group;
+        public TextView time;
+        public TextView date;
     }
 
 }

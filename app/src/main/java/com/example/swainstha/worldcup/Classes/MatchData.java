@@ -11,12 +11,16 @@ public class MatchData {
     private String score1;
     private String score2;
     private String group;
+    private String date;
+    private String time;
 
-    public MatchData(String team1, String score1, String score2, String team2) {
+    public MatchData(String team1, String score1, String score2, String team2, String date, String time) {
         this.team1 = team1;
         this.team2 = team2;
         this.score1 = score1;
         this.score2 = score2;
+        this.date = date;
+        this.time = time;
     }
 
     public MatchData(String group) {
@@ -61,5 +65,21 @@ public class MatchData {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

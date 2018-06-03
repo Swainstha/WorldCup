@@ -2,44 +2,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/item_match"
     style="?android:attr/listSeparatorTextViewStyle"
-    android:layout_width="match_parent"
-    android:layout_height="40dp">
+    android:layout_width="match_parent">
 
     <TextView
         android:id="@+id/item_match_team1"
-        android:layout_width="140dp"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="false"
         android:gravity="center"
         android:text="Team1" />
+
+    <ImageView
+        android:id="@+id/item_team1_flag"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="false"
+        android:layout_toRightOf="@+id/item_match_team1"
+        app:srcCompat="@drawable/germany"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/item_match_score1"
         android:layout_width="35dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@+id/item_match_team1"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/item_team1_flag"
         android:gravity="center"
-        android:paddingLeft="20dp"
-        android:text="Score1" />
+        android:text="-" />
 
     <TextView
         android:id="@+id/item_match_score2"
         android:layout_width="35dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/item_match_score1"
         android:gravity="center"
-        android:paddingLeft="20dp"
-        android:text="Score2" />
+        android:text="-" />
+
+    <ImageView
+        android:id="@+id/item_team2_flag"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/item_match_score2"
+        app:srcCompat="@drawable/spain"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/item_match_team2"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@+id/item_match_score2"
+        android:layout_toRightOf="@+id/item_team2_flag"
         android:gravity="center"
         android:text="Team2" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@+id/item_match_team2"
+        android:gravity="center"/>
 
 </RelativeLayout>

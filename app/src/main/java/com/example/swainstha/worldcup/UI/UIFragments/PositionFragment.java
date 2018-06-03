@@ -60,7 +60,7 @@ public class PositionFragment extends Fragment {
             Thread.currentThread().setName("Position");
             try {
                 //sending message to server
-                socket.emit("send", "1");
+                socket.emit("userRank");
                 return "";
 
             } catch (Exception e) {
@@ -197,7 +197,7 @@ public class PositionFragment extends Fragment {
                 public void call(Object... args) {
                 }
 
-            }).on("data", new Emitter.Listener() {
+            }).on("userRankData", new Emitter.Listener() {
 
                 @Override
                 public void call(Object... args) {
@@ -210,9 +210,9 @@ public class PositionFragment extends Fragment {
 
                                 //parse the json array
                                 for (int i = 0; i < array.length(); i++) {
-                                    positionList.add(new PositionData(array.getJSONObject(i).getString("rank"),
-                                            array.getJSONObject(i).getString("name"),
-                                            array.getJSONObject(i).getString("score")));
+                                    positionList.add(new PositionData(array.getJSONObject(i).getString("Position"),
+                                            array.getJSONObject(i).getString("Name"),
+                                            array.getJSONObject(i).getString("Score")));
                                 }
 
                                 //to notify that the data in the listview has been changed

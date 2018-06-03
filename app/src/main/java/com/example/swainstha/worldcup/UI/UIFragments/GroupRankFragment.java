@@ -16,9 +16,10 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.swainstha.worldcup.Adapters.GroupRankListAdapter;
 import com.example.swainstha.worldcup.Adapters.MatchListAdapter;
+import com.example.swainstha.worldcup.Classes.GroupRankData;
 import com.example.swainstha.worldcup.Classes.MatchData;
-import com.example.swainstha.worldcup.Classes.PositionData;
 import com.example.swainstha.worldcup.R;
 
 import org.json.JSONArray;
@@ -36,20 +37,19 @@ import io.socket.emitter.Emitter;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MatchFragment extends Fragment {
+public class GroupRankFragment extends Fragment {
 
 
-    MatchListAdapter matchListAdapter;
-    ListView matchListview;
-
-    //    private final String urlString = "http://192.168.1.119:3001";
-    private final String urlString = "https://world-cup-server.herokuapp.com";
+    GroupRankListAdapter groupRankListAdapter;
+    ListView groupRankListview;
+    private final String urlString = "http://192.168.1.119:3001";
+    //private final String urlString = "https://world-cup-server.herokuapp.com";
     private Socket socket;
-    ArrayList<MatchData> matchList;
-
-    public MatchFragment() {
+    ArrayList<GroupRankData> groupRankList;
+    public GroupRankFragment() {
         // Required empty public constructor
     }
+
 
     //calling node js server to retrieve data
     public class RetrieveData extends AsyncTask<String, Void, String> {
@@ -59,7 +59,7 @@ public class MatchFragment extends Fragment {
             Thread.currentThread().setName("Position");
             try {
                 //sending message to server
-                socket.emit("match", "1");
+                socket.emit("point", "1");
                 return "";
 
             } catch (Exception e) {
@@ -83,7 +83,7 @@ public class MatchFragment extends Fragment {
         // Inflate the layout for this fragment
 
         initializeSocket();
-        MatchFragment.RetrieveData retrieveData = new MatchFragment.RetrieveData();
+        GroupRankFragment.RetrieveData retrieveData = new GroupRankFragment.RetrieveData();
         try {
 
             //check for internet connectivity
@@ -105,28 +105,17 @@ public class MatchFragment extends Fragment {
             Toast.makeText(getContext(), "No Internet", Toast.LENGTH_SHORT).show();
         }
 
-        return inflater.inflate(R.layout.fragment_match, container, false);
+        return inflater.inflate(R.layout.fragment_group_rank, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
-        matchListview= view.findViewById(R.id.match_list_view);
-        matchListAdapter = new MatchListAdapter(this.getContext());
-
-        //for checking
-//        for (int i = 1; i < 21; i++) {
-//            if ((i+4) % 5 == 0) {
-//                matchListAdapter.addSectionHeaderItem(new MatchData("Group1"));
-//            } else {
-//                matchListAdapter.addItem(new MatchData("Chelsea","2","1","MU","20-05-2018","6:45 pm"));
-//            }
-//        }
-        //to notify that the data in the listview has been changed
-       // matchListAdapter.notifyDataSetChanged();
-
-        matchListview.setAdapter(matchListAdapter);
+        groupRankListview= view.findViewById(R.id.group_rank_listview);
+        groupRankListAdapter = new GroupRankListAdapter(this.getContext());
+        Log.i("INFO",groupRankListAdapter.toString());
+        groupRankListview.setAdapter(groupRankListAdapter);
     }
 
     //function called that allows the fragment to clean up resources associated with its View.
@@ -185,34 +174,37 @@ public class MatchFragment extends Fragment {
                 public void call(Object... args) {
                 }
 
-            }).on("matchData", new Emitter.Listener() {
+            }).on("pointData", new Emitter.Listener() {
 
                 @Override
                 public void call(Object... args) {
 
-                    Log.i("VERBOSE", args[0].toString());
+                    Log.i("INFO", args[0].toString());
                     final JSONArray array = (JSONArray) args[0];
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
                             try {
 
                                 String group = "T";
-                                int groupNum = 65;
+                                int rank = 1;
                                 for (int i = 0; i < array.length(); i++) {
                                     JSONObject obj = array.getJSONObject(i);
                                     if (!obj.getString("GN").equals(group)) {
-                                        matchListAdapter.addSectionHeaderItem(new MatchData("Group " + obj.getString("GN")));
+                                        groupRankListAdapter.addSectionHeaderItem(new GroupRankData("Group " + obj.getString("GN")));
+                                        groupRankListAdapter.addSubSectionHeaderItem(new GroupRankData("Rank","Country","Pts","GS","GC"));
                                         group = obj.getString("GN");
+                                        rank = 1;
                                     }
 
-                                    matchListAdapter.addItem(new MatchData(obj.getString("HT"),obj.getString("HS"),obj.getString("AS"),obj.getString("AT"),"20-05-2018","6:45 pm"));
+                                    groupRankListAdapter.addItem(new GroupRankData(rank++,obj.getString("CN"),obj.getInt("PTS"),obj.getInt("GF"),obj.getInt("GA")));
 
                                 }
                                 //to notify that the data in the listview has been changed
-                                matchListAdapter.notifyDataSetChanged();
+                                groupRankListAdapter.notifyDataSetChanged();
 
                             } catch (Exception e) {
 
+                                e.printStackTrace();
                             }
                             //Toast.makeText(getContext(), args[0].toString(), Toast.LENGTH_SHORT).show();
 
@@ -234,5 +226,4 @@ public class MatchFragment extends Fragment {
             Toast.makeText(getContext(), "No Internet", Toast.LENGTH_LONG).show();
         }
     }
-
 }
