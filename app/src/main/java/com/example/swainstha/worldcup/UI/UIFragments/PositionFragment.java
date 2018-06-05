@@ -145,7 +145,8 @@ public class PositionFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        socket.disconnect(); //disconnecting the socket
+        if(socket != null)
+            socket.disconnect(); //disconnecting the socket
         Log.i("INFO","Fragment Exit");
     }
 

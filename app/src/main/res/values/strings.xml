@@ -14,4 +14,6 @@
     <string name="title_activity_maps">Map</string>
 
     <string name="link">link</string>
+
+    <string name="search_hint">Names</string>
 </resources>

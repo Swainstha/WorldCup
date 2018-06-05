@@ -24,4 +24,10 @@
         android:title="Local"
         app:showAsAction="never"
         />
+
+    <item
+        android:id="@+id/search_m"
+        android:icon="@drawable/search"
+        android:title="@string/search_hint"
+        app:showAsAction="always"></item>
 </menu>

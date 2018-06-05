@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.swainstha.worldcup.UI.UIFragments.BetFragment">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/team1Flag"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/team1Country"
+        android:layout_below="@+id/team1Flag"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Germany"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/team1Name"
+        android:layout_toRightOf="@+id/team1Flag"
+        android:layout_toEndOf="@+id/team1Flag"
+        android:layout_alignBottom="@+id/team1Flag"
+        android:text="Swainstha"
+        android:layout_marginLeft="20dp"/>
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/team2Flag"
+        android:layout_below="@id/team1Country"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/team2Country"
+        android:layout_below="@+id/team2Flag"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:text="Spain"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/team2Name"
+
+        android:layout_marginLeft="20dp"
+        android:text="punkSushil"
+        android:layout_toRightOf="@+id/team2Flag"
+        android:layout_toEndOf="@+id/team2Flag"
+        android:layout_alignBottom="@+id/team2Flag"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id = "@+id/betText"
+        android:text="Bet Amount"
+        android:layout_below="@+id/team2Country"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/betAmount"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/betText"
+        android:layout_toEndOf="@+id/betText"
+        android:layout_alignBottom="@+id/betText"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id= "@+id/betButton"
+        android:text="Bet"
+        android:layout_below="@+id/betText"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"/>
+
+</RelativeLayout>

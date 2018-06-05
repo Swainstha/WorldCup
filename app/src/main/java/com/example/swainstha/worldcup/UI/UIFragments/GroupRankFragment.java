@@ -122,7 +122,8 @@ public class GroupRankFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        socket.disconnect(); //disconnecting the socket
+        if(socket != null)
+            socket.disconnect(); //disconnecting the socket
         Log.i("INFO","Fragment Exit");
     }
 
@@ -191,12 +192,12 @@ public class GroupRankFragment extends Fragment {
                                     JSONObject obj = array.getJSONObject(i);
                                     if (!obj.getString("GN").equals(group)) {
                                         groupRankListAdapter.addSectionHeaderItem(new GroupRankData("Group " + obj.getString("GN")));
-                                        groupRankListAdapter.addSubSectionHeaderItem(new GroupRankData("Rank","Country","Pts","GS","GC"));
+                                        groupRankListAdapter.addItem(new GroupRankData("Rank","Country","Pts","MP","Win","Draw","Lose"));
                                         group = obj.getString("GN");
                                         rank = 1;
                                     }
 
-                                    groupRankListAdapter.addItem(new GroupRankData(rank++,obj.getString("CN"),obj.getInt("PTS"),obj.getInt("GF"),obj.getInt("GA")));
+                                    groupRankListAdapter.addItem(new GroupRankData(rank++ + "",obj.getString("CN"),obj.getInt("PTS") + "",obj.getInt("MP") + "",obj.getInt("W") + "",obj.getInt("D") + "",obj.getInt("L") + ""));
 
                                 }
                                 //to notify that the data in the listview has been changed

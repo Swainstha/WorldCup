@@ -12,31 +12,45 @@
         android:gravity="center"/>
 
     <TextView
-        android:layout_width="180dp"
+        android:layout_width="110dp"
         android:layout_height="30dp"
-        android:id="@+id/teamName"
+        android:id="@+id/country"
         android:layout_toRightOf="@+id/sn"
         android:gravity="center"/>
 
     <TextView
-        android:layout_width="50dp"
+        android:layout_width="40dp"
         android:layout_height="30dp"
         android:id="@+id/score"
-        android:layout_toRightOf="@+id/teamName"
+        android:layout_toRightOf="@+id/country"
         android:gravity="center"/>
 
     <TextView
-        android:layout_width="50dp"
+        android:layout_width="40dp"
         android:layout_height="30dp"
-        android:id="@+id/g_scored"
+        android:id="@+id/mp"
         android:layout_toRightOf="@+id/score"
         android:gravity="center"/>
 
     <TextView
-        android:layout_width="50dp"
+        android:layout_width="40dp"
         android:layout_height="30dp"
-        android:id="@+id/g_conceded"
-        android:layout_toRightOf="@+id/g_scored"
+        android:id="@+id/win"
+        android:layout_toRightOf="@+id/mp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:id="@+id/draw"
+        android:layout_toRightOf="@+id/win"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:id="@+id/lose"
+        android:layout_toRightOf="@+id/draw"
         android:gravity="center"/>
 
 </android.widget.RelativeLayout>

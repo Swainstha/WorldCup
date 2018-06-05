@@ -47,7 +47,6 @@ public class MainActivity extends  AppCompatActivity implements NavigationView.O
         setSupportActionBar(toolbar);
         toolbar.setTitle("News");
 
-
         //pointed to activity_nav_drawer
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -148,6 +147,9 @@ public class MainActivity extends  AppCompatActivity implements NavigationView.O
             editor.putString(getString(R.string.link), "http://192.168.1.119:3001");
             editor.apply();
 
+        } else if(id == R.id.search_m) {
+            super.onSearchRequested();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

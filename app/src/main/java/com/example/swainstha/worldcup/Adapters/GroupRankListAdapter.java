@@ -98,23 +98,24 @@ public class GroupRankListAdapter  extends BaseAdapter{
             switch (rowType) {
                 case TYPE_ITEM:
                     convertView = mInflater.inflate(R.layout.group_rank_list, null);
-                    holder.id = convertView.findViewById(R.id.sn);
-                    holder.teamName = convertView.findViewById(R.id.teamName);
+                    holder.rank = convertView.findViewById(R.id.sn);
+                    holder.country = convertView.findViewById(R.id.country);
                     holder.point = convertView.findViewById(R.id.score);
-                    holder.g_scored = convertView.findViewById(R.id.g_scored);
-                    holder.g_conceded = convertView.findViewById(R.id.g_conceded);
+                    holder.mp = convertView.findViewById(R.id.mp);
+                    holder.win = convertView.findViewById(R.id.win);
+                    holder.draw = convertView.findViewById(R.id.draw);
+                    holder.lose = convertView.findViewById(R.id.lose);
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.match_list_header, null);
                     holder.group = convertView.findViewById(R.id.match_list_head);
                     break;
                 case TYPE_SEPARATOR_HEADER:
-                    convertView = mInflater.inflate(R.layout.group_rank_subheader, null);
-                    holder.rank = convertView.findViewById(R.id.rank);
-                    holder.teamName = convertView.findViewById(R.id.country);
-                    holder.point = convertView.findViewById(R.id.pts);
-                    holder.g_scored = convertView.findViewById(R.id.gs);
-                    holder.g_conceded = convertView.findViewById(R.id.gc);
+//                    convertView = mInflater.inflate(R.layout.group_rank_subheader, null);
+//                    holder.rank = convertView.findViewById(R.id.rank);
+//                    holder.country = convertView.findViewById(R.id.country);
+//                    holder.point = convertView.findViewById(R.id.pts);
+
                     break;
             }
             convertView.setTag(holder);
@@ -123,11 +124,13 @@ public class GroupRankListAdapter  extends BaseAdapter{
         }
         switch (rowType) {
             case TYPE_ITEM:
-                holder.id.setText(mData.get(position).getId() + "");
-                holder.teamName.setText(mData.get(position).getTeamName());
-                holder.point.setText(mData.get(position).getPoint() + "");
-                holder.g_scored.setText(mData.get(position).getG_scored() + "");
-                holder.g_conceded.setText(mData.get(position).getG_conceded() + "");
+                holder.rank.setText(mData.get(position).getRank());
+                holder.country.setText(mData.get(position).getCountry());
+                holder.point.setText(mData.get(position).getPts());
+                holder.mp.setText(mData.get(position).getMp());
+                holder.win.setText(mData.get(position).getWin());
+                holder.draw.setText(mData.get(position).getDraw());
+                holder.lose.setText(mData.get(position).getLose());
 
                 break;
 
@@ -136,11 +139,11 @@ public class GroupRankListAdapter  extends BaseAdapter{
                 break;
 
             case TYPE_SEPARATOR_HEADER:
-                holder.rank.setText(mData.get(position).getRank());
-                holder.teamName.setText(mData.get(position).getTeamName());
-                holder.point.setText(mData.get(position).getPts());
-                holder.g_scored.setText(mData.get(position).getGs());
-                holder.g_conceded.setText(mData.get(position).getGc());
+//                holder.rank.setText(mData.get(position).getRank());
+//                holder.teamName.setText(mData.get(position).getTeamName());
+//                holder.point.setText(mData.get(position).getPts());
+//                holder.g_scored.setText(mData.get(position).getGs());
+//                holder.g_conceded.setText(mData.get(position).getGc());
         }
 
         return convertView;
@@ -148,12 +151,13 @@ public class GroupRankListAdapter  extends BaseAdapter{
 
     //viewholder cache
     public static class ViewHolder {
-        public TextView id;
         public TextView rank;
-        public TextView teamName;
+        public TextView country;
         public TextView point;
-        public TextView g_scored;
-        public TextView g_conceded;
+        public TextView mp;
+        public TextView win;
         public TextView group;
+        public TextView draw;
+        public TextView lose;
     }
 }

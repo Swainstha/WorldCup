@@ -6,36 +6,37 @@ package com.example.swainstha.worldcup.Classes;
 
 public class GroupRankData {
 
-    private int id;
-    private String teamName;
-    private int point;
-    private int g_scored;
-    private int g_conceded;
-    private String group;
-
-    private String rank;
+    private String country;
     private String pts;
-    private String gs;
-    private String gc;
 
-    public GroupRankData(int id, String teamName, int point, int g_scored, int g_conceded) {
-        this.id = id;
-        this.teamName = teamName;
-        this.point = point;
-        this.g_scored = g_scored;
-        this.g_conceded = g_conceded;
-    }
+    private String group;
+    private String rank;
+
+    private String mp;
+    private String win;
+    private String draw;
+    private String lose;
 
     public GroupRankData(String group) {
         this.group = group;
     }
 
-    public GroupRankData(String rank, String country,String pts, String gs, String gc ) {
+    public GroupRankData(String rank, String country, String pts, String mp, String win, String draw, String lose) {
         this.rank = rank;
-        this.teamName = country;
+        this.country = country;
         this.pts = pts;
-        this.gs = gs;
-        this.gc = gc;
+        this.mp = mp;
+        this.win = win;
+        this.draw = draw;
+        this.lose = lose;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getPts() {
@@ -46,20 +47,12 @@ public class GroupRankData {
         this.pts = pts;
     }
 
-    public String getGs() {
-        return gs;
+    public String getGroup() {
+        return group;
     }
 
-    public void setGs(String gs) {
-        this.gs = gs;
-    }
-
-    public String getGc() {
-        return gc;
-    }
-
-    public void setGc(String gc) {
-        this.gc = gc;
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String getRank() {
@@ -70,51 +63,35 @@ public class GroupRankData {
         this.rank = rank;
     }
 
-    public String getTeamName() {
-        return teamName;
+    public String getMp() {
+        return mp;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setMp(String mp) {
+        this.mp = mp;
     }
 
-    public int getPoint() {
-        return point;
+    public String getWin() {
+        return win;
     }
 
-    public void setPoint(int point) {
-        this.point = point;
+    public void setWin(String win) {
+        this.win = win;
     }
 
-    public int getG_scored() {
-        return g_scored;
+    public String getDraw() {
+        return draw;
     }
 
-    public void setG_scored(int g_scored) {
-        this.g_scored = g_scored;
+    public void setDraw(String draw) {
+        this.draw = draw;
     }
 
-    public int getG_conceded() {
-        return g_conceded;
+    public String getLose() {
+        return lose;
     }
 
-    public void setG_conceded(int g_conceded) {
-        this.g_conceded = g_conceded;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setLose(String lose) {
+        this.lose = lose;
     }
 }
