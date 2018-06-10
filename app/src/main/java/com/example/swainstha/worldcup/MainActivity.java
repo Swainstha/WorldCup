@@ -22,16 +22,32 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.swainstha.worldcup.UI.UIFragments.BetFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.CommonFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.GroupRankFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.PositionFragment;
 import com.example.swainstha.worldcup.UI.UIFragments.MatchFragment;
 
 
-public class MainActivity extends  AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends  AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,MatchFragment.BetArguments{
 
     Toolbar toolbar;
     String provider;
+
+    @Override
+    public void sendBetArguments(int id, String team1, String team2, String country1, String country2) {
+        BetFragment betFragment = new BetFragment();
+        toolbar.setTitle("Bet");
+        Bundle args = new Bundle();
+        args.putInt("id", id);
+        args.putString("team1", team1);
+        args.putString("team2", team2);
+        args.putString("country1", country1);
+        args.putString("country2", country2);
+        betFragment.setArguments(args);
+        loadFragment(betFragment);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

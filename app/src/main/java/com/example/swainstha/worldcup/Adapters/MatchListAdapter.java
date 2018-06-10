@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.swainstha.worldcup.Classes.MatchData;
@@ -24,6 +25,7 @@ public class MatchListAdapter extends BaseAdapter {
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_SEPARATOR = 1;
+    private Context context;
 
     private ArrayList<MatchData> mData = new ArrayList<MatchData>();
     private TreeSet<Integer> sectionHeader = new TreeSet<Integer>();
@@ -33,6 +35,7 @@ public class MatchListAdapter extends BaseAdapter {
     public MatchListAdapter(@NonNull Context context) {
         mInflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.context = context;
     }
 
     //adding other items
@@ -93,6 +96,8 @@ public class MatchListAdapter extends BaseAdapter {
                     holder.score2 = (TextView) convertView.findViewById(R.id.item_match_score2);
                     //holder.time = (TextView) convertView.findViewById(R.id.item_match_time);
                     //holder.date = (TextView) convertView.findViewById(R.id.item_match_date);
+                    holder.country1 = convertView.findViewById(R.id.item_team1_flag);
+                    holder.country2 = convertView.findViewById(R.id.item_team2_flag);
                     break;
                 case TYPE_SEPARATOR:
                     convertView = mInflater.inflate(R.layout.match_list_header, null);
@@ -109,6 +114,19 @@ public class MatchListAdapter extends BaseAdapter {
                 holder.team2.setText(mData.get(position).getTeam2());
                 holder.score1.setText(mData.get(position).getScore1());
                 holder.score2.setText(mData.get(position).getScore2());
+                String c1 = mData.get(position).getTeam1();
+                c1 = c1.toLowerCase();
+                c1 = c1.replaceAll("\\s","");
+                int resID = context.getResources().getIdentifier(c1,
+                        "drawable", context.getPackageName());
+                holder.country1.setImageResource(resID);
+
+                String c2 = mData.get(position).getTeam2();
+                c2 = c2.toLowerCase();
+                c2 = c2.replaceAll("\\s","");
+                resID = context.getResources().getIdentifier(c2,
+                        "drawable", context.getPackageName());
+                holder.country2.setImageResource(resID);
                 //holder.date.setText(mData.get(position).getDate());
                 //holder.time.setText(mData.get(position).getTime());
                 break;
@@ -127,6 +145,8 @@ public class MatchListAdapter extends BaseAdapter {
         public TextView score1;
         public TextView score2;
         public TextView group;
+        public ImageView country1;
+        public ImageView country2;
         public TextView time;
         public TextView date;
     }

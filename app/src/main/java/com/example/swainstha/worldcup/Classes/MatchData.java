@@ -6,6 +6,7 @@ package com.example.swainstha.worldcup.Classes;
 
 public class MatchData {
 
+    private int id;
     private String team1;
     private String team2;
     private String score1;
@@ -13,14 +14,28 @@ public class MatchData {
     private String group;
     private String date;
     private String time;
+    private MatchData matchData;
 
-    public MatchData(String team1, String score1, String score2, String team2, String date, String time) {
+    public MatchData(int id, String team1, String score1, String score2, String team2, String date, String time) {
+        this.id = id;
         this.team1 = team1;
         this.team2 = team2;
         this.score1 = score1;
         this.score2 = score2;
         this.date = date;
         this.time = time;
+    }
+
+    public MatchData(MatchData matchData) {
+        this.matchData = matchData;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public MatchData(String group) {

@@ -4,6 +4,7 @@ package com.example.swainstha.worldcup.UI.UIFragments;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -14,6 +15,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -52,13 +56,14 @@ public class BetFragment extends Fragment {
     private TextView team1;
     private TextView team2;
     private TextView betText;
-    private Spinner betAmount;
+    private Spinner betAmountSpinner;
     private Button betButton;
+
+    private String betAmount;
 
     public BetFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,39 +85,99 @@ public class BetFragment extends Fragment {
         team1 = view.findViewById(R.id.team1Name);
         team2 = view.findViewById(R.id.team2Name);
         //betText = view.findViewById(R.id.betText);
-        betAmount = view.findViewById(R.id.betAmount);
+        betAmountSpinner = view.findViewById(R.id.betAmount);
         betButton = view.findViewById(R.id.betButton);
 
-        String user1 = getActivity().getIntent().getExtras().getString("user1");
-        String user2 = getActivity().getIntent().getExtras().getString("user2");
-        String countryName1 = getActivity().getIntent().getExtras().getString("country1");
-        String countryName2 = getActivity().getIntent().getExtras().getString("country2");
-        String amount = getActivity().getIntent().getExtras().getString("betAmount");
+        readBundle(getArguments());
 
-        image1.setImageResource(R.drawable.spain);
-        image2.setImageResource(R.drawable.germany);
-        team1.setText(user1);
-        team2.setText(user2);
-        country1.setText(countryName1);
-        country2.setText(countryName2);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.bet_amount_array, android.R.layout.simple_spinner_item);
+
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        betAmountSpinner.setAdapter(adapter);
+
+        betAmountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                betAmount = (String) adapterView.getItemAtPosition(i);
+                Log.i("Bet", betAmount);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                 betAmount = 5 + "";
+            }
+        });
+
         betButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("INFO","Bet");
+                try{
+                    SendBet sendBet = new SendBet();
+                    Bundle bundle = getArguments();
+                    sendBet.execute(bundle.getInt("id") + "",bundle.getString("team1"),bundle.getString("team2"),bundle.getString("country1"),
+                            bundle.getString("country2"),betAmount).get();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    Log.i("INFO","Failed Sending");
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                    Log.i("INFO","Failed Sending");
+                }
             }
         });
 
     }
 
+    private void readBundle(Bundle bundle) {
+        Log.i("readbundle",bundle.getInt("id") + "");
+        if (bundle != null) {
+            String c1 = bundle.getString("country1");
+            country1.setText(c1);
+            c1 = c1.toLowerCase();
+            c1 = c1.replaceAll("\\s","");
+
+            int resID = getResources().getIdentifier(c1,
+                    "drawable", getContext().getPackageName());
+
+            image1.setImageResource(resID);
+
+            String c2 = bundle.getString("country2");
+            country2.setText(c2);
+            c2 = c2.toLowerCase();
+            c2 = c2.replaceAll("\\s","");
+            resID = getResources().getIdentifier(c2,
+                    "drawable", getContext().getPackageName());
+
+            image2.setImageResource(resID);
+            team1.setText(bundle.getString("team1"));
+            team2.setText(bundle.getString("team2"));
+
+
+        }
+    }
+
     //calling node js server to retrieve data
-    public class RetrieveData extends AsyncTask<String, Void, String> {
+    public class SendBet extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
 
             Thread.currentThread().setName("Position");
             try {
                 //sending message to server
-                socket.emit("point", "1");
+                Log.i("match_id",urls[0]);
+                Log.i("team1",urls[1]);
+                Log.i("team2",urls[2]);
+                Log.i("country1",urls[3]);
+                Log.i("country2",urls[4]);
+                Log.i("betAmount",urls[5]);
+                socket.emit("betStart", urls[0],urls[1],urls[2],urls[3],urls[5]);
                 return "";
 
             } catch (Exception e) {
@@ -152,7 +217,7 @@ public class BetFragment extends Fragment {
 
             socket = IO.socket(url); //specifying the url
             socket.connect(); //connecting to the server
-            socket.emit("joinAndroid",Integer.toString(id));  //specifying the join group to the server
+            //socket.emit("joinAndroid",Integer.toString(id));  //specifying the join group to the server
 
             //callback functions for socket connected, message received and socket disconnected
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {

@@ -6,7 +6,7 @@
 
     <ImageView
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:id="@+id/team1Flag"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="50dp"
@@ -18,7 +18,7 @@
         android:id="@+id/team1Country"
         android:layout_below="@+id/team1Flag"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Germany"/>
 
     <TextView
@@ -33,7 +33,7 @@
 
     <ImageView
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:id="@+id/team2Flag"
         android:layout_below="@id/team1Country"
         android:layout_marginLeft="50dp"
@@ -45,7 +45,7 @@
         android:id="@+id/team2Country"
         android:layout_below="@+id/team2Flag"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Spain"/>
 
     <TextView

@@ -1,6 +1,7 @@
 package com.example.swainstha.worldcup.UI.UIFragments;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -46,6 +48,12 @@ public class MatchFragment extends Fragment {
     private final String urlString = "https://world-cup-server.herokuapp.com";
     private Socket socket;
     ArrayList<MatchData> matchList;
+    BetArguments betArguments;
+
+    public interface BetArguments {
+        public void sendBetArguments(int id, String team1, String team2, String country1, String country2);
+    }
+
 
     public MatchFragment() {
         // Required empty public constructor
@@ -82,6 +90,7 @@ public class MatchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+
         initializeSocket();
         MatchFragment.RetrieveData retrieveData = new MatchFragment.RetrieveData();
         try {
@@ -105,6 +114,14 @@ public class MatchFragment extends Fragment {
             Toast.makeText(getContext(), "No Internet", Toast.LENGTH_SHORT).show();
         }
 
+        try {
+            betArguments = (BetArguments) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement BetArguments");
+        }
+
+
         return inflater.inflate(R.layout.fragment_match, container, false);
     }
 
@@ -127,6 +144,15 @@ public class MatchFragment extends Fragment {
        // matchListAdapter.notifyDataSetChanged();
 
         matchListview.setAdapter(matchListAdapter);
+        matchListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MatchData matchData = (MatchData)matchListview.getItemAtPosition(i);
+                Log.i("INFO",matchData.getTeam1());
+                betArguments.sendBetArguments(matchData.getId(),"cr7","lm10",matchData.getTeam1(),matchData.getTeam2());
+            }
+        });
+
     }
 
     //function called that allows the fragment to clean up resources associated with its View.
@@ -167,8 +193,8 @@ public class MatchFragment extends Fragment {
             }
 
             //generating a random number for join id in the server
-            Random rand = new Random();
-            int  id = rand.nextInt(50) + 1;
+//            Random rand = new Random();
+//            int  id = rand.nextInt(50) + 1;
 
             //using sharedPreferences to read the link to the server: heroku or local
             SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -177,7 +203,7 @@ public class MatchFragment extends Fragment {
 
             socket = IO.socket(url); //specifying the url
             socket.connect(); //connecting to the server
-            socket.emit("joinAndroid",Integer.toString(id));  //specifying the join group to the server
+            socket.emit("joinAndroid",Integer.toString(2));  //specifying the join group to the server
 
             //callback functions for socket connected, message received and socket disconnected
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
@@ -206,7 +232,7 @@ public class MatchFragment extends Fragment {
                                         group = obj.getString("GN");
                                     }
 
-                                    matchListAdapter.addItem(new MatchData(obj.getString("HT"),obj.getString("HS"),obj.getString("AS"),obj.getString("AT"),"20-05-2018","6:45 pm"));
+                                    matchListAdapter.addItem(new MatchData(obj.getInt("id"),obj.getString("HT"),obj.getString("HS"),obj.getString("AS"),obj.getString("AT"),"20-05-2018","6:45 pm"));
 
                                 }
                                 //to notify that the data in the listview has been changed
