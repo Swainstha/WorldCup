@@ -25,6 +25,8 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.sa.socket_final_test.Login.Login;
+
 import org.json.JSONObject;
 
 import io.socket.client.IO;
@@ -80,7 +82,12 @@ public MyService()
         Toast.makeText(this,"Service created ...", Toast.LENGTH_LONG).show();
         createNotificationChannel();
         Intent i = intent;
-        identity=i.getStringExtra("identity");
+        if(SaveSharedPreference.getUserID(this).length() == 0)
+        {
+           identity=SaveSharedPreference.getUserID(this);
+        }
+        else identity =null;
+
         mBuilder = new NotificationCompat.Builder(this, "id")
                 .setSmallIcon(R.drawable.argentina)
                 .setContentTitle("My notification")

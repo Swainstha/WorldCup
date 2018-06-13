@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sa.socket_final_test.Login.Login;
 import com.example.sa.socket_final_test.UIFragments.BetFragment;
 
 import com.example.sa.socket_final_test.MyService;
@@ -121,6 +122,17 @@ public MyService testService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(SaveSharedPreference.getUserID(MainActivity.this).length() == 0)
+        {
+            Intent intent_login = new Intent(this,Login.class);
+            startActivity(intent_login);
+        }
+        else
+        {
+            Intent serviceIntent=new Intent(MainActivity.this, MyService.class);
+            serviceIntent.putExtra("identity",identity);
+            startService(serviceIntent);
+        }
 
         //set the layout to activity_nav_drawer which contains the layout of activity_nav_drawer
         //and activity_main. Contentview is set to activity_nav_drawer but we should edit the layout activity_main
@@ -128,9 +140,7 @@ public MyService testService;
         Intent intentId=getIntent();
         identity = intentId.getStringExtra("identity");
         setContentView(R.layout.activity_nav_drawer);
-        Intent serviceIntent=new Intent(MainActivity.this, MyService.class);
-        serviceIntent.putExtra("identity",identity);
-        startService(serviceIntent);
+
         // bindService(i, mConnection, Context.BIND_AUTO_CREATE);
 
         Toast.makeText(getApplicationContext(), String.valueOf(MyService.getMyService()), Toast.LENGTH_SHORT).show();
@@ -232,6 +242,10 @@ public MyService testService;
             return true;
 
         } else if (id==R.id.Logout) {
+            SaveSharedPreference.clearUserID(MainActivity.this);
+            Intent intent_login = new Intent(this,Login.class);
+            stopService(new Intent(this,MyService.class));
+            startActivity(intent_login);
 
 
         } else if(id == R.id.Heroku) {

@@ -1,5 +1,6 @@
 package com.example.sa.socket_final_test.Login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -63,9 +64,13 @@ public class Signup extends AppCompatActivity{
                 runOnUiThread(new Runnable(){
                     public void run()
                     {
-                        Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Signed up successfully",Toast.LENGTH_SHORT).show();
+
+
                     }
                 });
+                Intent i = new Intent(Signup.this, Login.class);
+                startActivity(i);
                } catch (JSONException e) {
                 e.printStackTrace();
             }

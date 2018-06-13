@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.example.sa.socket_final_test.Adapters.SocketService;
 import com.example.sa.socket_final_test.MainActivity;
 import com.example.sa.socket_final_test.R;
+import com.example.sa.socket_final_test.SaveSharedPreference;
 
 
 import org.json.JSONObject;
@@ -36,6 +37,7 @@ public class Login extends AppCompatActivity {
     SocketService mSocket;
     Socket socket;
     private String urlString="http://192.168.1.119:3001";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,8 @@ public class Login extends AppCompatActivity {
                         //Toast.makeText(getApplicationContext(),user_det.get("result").toString()+user_det.get("id").toString(), Toast.LENGTH_LONG).show();
                         if(valid_user.equals("True"))
                         {
+
+                            SaveSharedPreference.setUserID(Login.this,id);
                             Intent i = new Intent(getApplicationContext(),MainActivity.class);
                             Log.i("info","new activity started, logged in");
                             i.putExtra("identity",id);
